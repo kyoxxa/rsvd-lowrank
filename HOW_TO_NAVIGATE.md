@@ -13,18 +13,23 @@ src/  →  experiments/  →  results/  →  paper/
 
 ## What is where
 
-| Path | What it is | Edit it? |
-| --- | --- | --- |
-| `src/rsvd.py` | The randomized SVD algorithm (about 15 lines) | Only after agreeing |
-| `src/__init__.py` | Empty file that makes `src` importable | No |
-| `experiments/exp_synthetic.py` | Benchmark on generated matrices: error and speed vs. rank | Yes, via branch |
-| `experiments/exp_sir.py` | SIR epidemic application (coming) | Yes, via branch |
-| `results/figures/` | Plots made by the scripts | Never by hand |
-| `results/tables/` | CSV tables made by the scripts | Never by hand |
-| `paper/` | LaTeX source of the paper | Yes |
-| `README.md` | Front page of the repo | Yes |
-| `requirements.txt` | Library list with exact versions | Only when adding a library |
-| `.gitignore` | Files git must not upload (like `.venv/`) | Rarely |
+```
+rsvd-lowrank/
+├── src/                     # the algorithm
+│   ├── rsvd.py              # randomized SVD (edit only after agreeing)
+│   └── __init__.py          # makes src importable, don't touch
+├── experiments/             # scripts that test the algorithm
+│   ├── exp_synthetic.py     # error and speed on generated matrices
+│   └── exp_sir.py           # SIR epidemic application (coming)
+├── results/                 # created by the scripts, never edit by hand
+│   ├── figures/             # plots for the paper
+│   └── tables/              # CSV results
+├── paper/                   # LaTeX source of the paper
+├── README.md                # front page of the repo
+├── HOW_TO_NAVIGATE.md       # this guide
+├── requirements.txt         # libraries + versions
+└── .gitignore               # files git must not upload
+```
 
 ## How `rsvd.py` works
 

@@ -15,20 +15,16 @@ src/  →  experiments/  →  results/  →  paper/
 
 ```
 rsvd-lowrank/
-├── src/                     # the algorithm
-│   ├── rsvd.py              # randomized SVD (edit only after agreeing)
-│   └── __init__.py          # makes src importable, don't touch
-├── experiments/             # scripts that test the algorithm
-│   ├── exp_synthetic.py     # error and speed on generated matrices
-│   └── exp_sir.py           # SIR epidemic application (coming)
-├── results/                 # created by the scripts, never edit by hand
-│   ├── figures/             # plots for the paper
-│   └── tables/              # CSV results
-├── paper/                   # LaTeX source of the paper
-├── README.md                # front page of the repo
-├── HOW_TO_NAVIGATE.md       # this guide
-├── requirements.txt         # libraries + versions
-└── .gitignore               # files git must not upload
+├── src/
+│   └── rsvd.py            # the algorithm
+├── experiments/
+│   ├── exp_synthetic.py   # test on generated matrices
+│   └── exp_sir.py         # epidemic test
+├── results/               # plots and tables (made by the scripts)
+├── paper/                 # the paper (Word + PDF)
+├── README.md              # project overview
+├── HOW_TO_NAVIGATE.md     # this guide
+└── requirements.txt       # needed libraries
 ```
 
 ## How `rsvd.py` works

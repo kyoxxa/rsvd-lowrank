@@ -34,3 +34,7 @@ python -m experiments.exp_synthetic
 ```
 
 The plots and tables are saved in the `results/` folder.
+
+## Reference
+
+N Halko, P G Martinsson, and J. A. Tropp, "Finding structure with randomness: Probabilistic algorithms for constructing approximate matrix decompositions," *SIAM Review*, vol. 53, no. 2, pp. 217–288, 2011.

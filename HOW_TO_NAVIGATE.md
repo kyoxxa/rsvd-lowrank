@@ -1,64 +1,32 @@
-# How to navigate this repo
+# Repository guide
 
-This file explains what lives where in `rsvd-lowrank` and how to contribute.
-
-## The big picture
+## Layout
 
 ```
-src/  →  experiments/  →  results/  →  paper/
-(algorithm)  (tests)     (plots, tables)  (LaTeX)
+src/rsvd.py                  randomized SVD implementation
+experiments/exp_synthetic.py benchmark on synthetic matrices
+results/                     generated figures and tables
+paper/                       paper (PDF)
+requirements.txt             dependencies
 ```
 
-`src/` holds the algorithm, `experiments/` runs it, `results/` stores what comes out, and that goes into the paper.
+`results/` is produced by the scripts in `experiments/` and should not be edited by hand.
 
-## What is where
+## Algorithm
 
-```
-rsvd-lowrank/
-├── src/
-│   └── rsvd.py            # the algorithm
-├── experiments/
-│   ├── exp_synthetic.py   # test on generated matrices
-│   └── exp_sir.py         # epidemic test
-├── results/               # plots and tables (made by the scripts)
-├── paper/                 # the paper (Word + PDF)
-├── README.md              # project overview
-├── HOW_TO_NAVIGATE.md     # this guide
-└── requirements.txt       # needed libraries
-```
+`rsvd(A, k, p, q)` computes a rank-`k` approximation of `A`:
 
-## How `rsvd.py` works
+1. Sample the range of `A` with a Gaussian matrix of `k + p` columns and orthonormalize (QR).
+2. Optionally refine with `q` power iterations.
+3. Compute the SVD of the projected matrix `Qᵀ A` and lift it back with `Q`.
 
-1. Multiply the matrix `A` by a small random matrix to sample its most important directions.
-2. Orthonormalize the result with a QR decomposition to get a basis `Q`. With power iterations, repeat this `q` times for more accuracy.
-3. Compute the SVD of the small matrix `Qᵀ A` and map it back with `Q`.
-
-Parameters: `k` = target rank, `p` = oversampling (extra random directions), `q` = power iterations.
-
-## One-time setup
+## Setup
 
 ```bash
 git clone https://github.com/kyoxxa/rsvd-lowrank.git
 cd rsvd-lowrank
 python -m venv .venv
-source .venv/Scripts/activate      # Mac/Linux: source .venv/bin/activate
+source .venv/Scripts/activate   # Linux/macOS: source .venv/bin/activate
 pip install -r requirements.txt
-git config --global user.name "your-github-username"
-git config --global user.email "your GitHub no-reply email"
-python -m experiments.exp_synthetic  # check that everything runs
+python -m experiments.exp_synthetic
 ```
-
-## How to contribute
-
-1. Get the latest version: `git checkout main` then `git pull`
-2. Make a branch for your task: `git checkout -b my-task-name`
-3. Work, then save: `git add .` and `git commit -m "Short description"`
-4. Upload: `git push -u origin my-task-name`
-5. On GitHub, click **Compare & pull request**. The other person reviews and clicks **Merge**.
-
-## Rules
-
-- Never push straight to `main`. Always branch + pull request.
-- One person per file at a time, to avoid conflicts.
-- Commit messages say what changed.
-- Every figure and table must come from a script in `experiments/`, with fixed random seeds.
